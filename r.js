@@ -48,7 +48,7 @@ let desc = Object.getOwnPropertyDescriptor(user, 'name');
 console.log("desc: " + desc);
 console.log("desc (JSON): " + JSON.stringify(desc, null, 2));
 
-// showDivider();
+showDivider();
 
 /*
 showMembers(desc);
