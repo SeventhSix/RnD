@@ -1,5 +1,14 @@
 'use strict';
 
+function User(name) {
+    this.name = name;
+
+    this.sayHi = function(name) {
+        let surname = name;
+        console.log("My name is: " + this.name + " " + surname);
+    };
+}
+
 // ==================================================================================================================================
 
 function showMembers(obj) {
@@ -14,21 +23,17 @@ function showDivider() {
 
 // ==================================================================================================================================
 
-function User(name) {
-    this.name = name;
-
-    this.sayHi = function(name) {
-        let surname = name;
-        console.log("My name is: " + this.name + " " + surname);
-    };
+function setPropertyWritableFlag(obj, property, value) {
+    Object.defineProperty(obj, property, {
+        writable: value
+    });
 }
 
 // ==================================================================================================================================
 
-function setPropertyFlag(obj, property, flag, value) {
-    Object.defineProperty(obj, property, {
-        flag: false
-    });
+function getPropertyProperties(obj, property) {
+    let propertyDescriptor = Object.getOwnPropertyDescriptor(obj, property);
+    return propertyDescriptor;
 }
 
 // ==================================================================================================================================
@@ -40,32 +45,12 @@ user.sayHi("Sparrow");
 
 showDivider();
 
-Object.defineProperty(user, "name", {
-  writable: false
-});
-
-let desc = Object.getOwnPropertyDescriptor(user, 'name');
-console.log("desc: " + desc);
+setPropertyWritableFlag(user, "name", false);
+let desc = getPropertyProperties(user, 'name');
 console.log("desc (JSON): " + JSON.stringify(desc, null, 2));
-
-// SS made this change
-// showDivider();
-
-/*
-showMembers(desc);
 
 showDivider();
 
 showMembers(user);
 
 showDivider();
-
-console.log(user.sayHi.name);
-
-showDivider();
-
-console.dir([1,2,3]);
-
-showDivider();
-
-*/
