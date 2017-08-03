@@ -2,6 +2,10 @@
 
 // ==================================================================================================================================
 
+//      #########   DOCUMENTATION -> https://javascript.info/
+
+// ==================================================================================================================================
+
 // Object definition - to be used with new
 
 function SayObject(name) {
@@ -17,6 +21,10 @@ function SayObject(name) {
 
 // Class definition - to be used with new or for inheritance
 
+// Classes provide "super" keyword:
+//      super.method(...) to call a parent method.
+//      super(...) to call a parent constructor (inside our constructor only).
+
 class SayClass {
     constructor(name) {
         this.name = name;
@@ -30,7 +38,7 @@ class SayClass {
 
 // ==================================================================================================================================
 
-// Class factory - inheritance
+// Class factory - to be used with new or for inheritance
 
 function SayClassFactory (p1) {
     if (p1.startsWith("o")) {
@@ -63,6 +71,39 @@ class ManufacturedSayClassOne extends SayClassFactory("one") {
 }
 
 class ManufacturedSayClassTwo extends SayClassFactory("two") {
+}
+
+// ==================================================================================================================================
+
+// Extending JavaScript Native Classes / Objects
+
+class PowerArray extends Array {
+    containsStuff() {
+        return this.length != 0;
+    }
+}
+
+// ==================================================================================================================================
+
+// Property getters and setters
+
+class PropertyBagNOT  {
+    constructor() {
+        this.name = "Louis";
+        this.surname = "Sparrow";
+    }
+
+    get Name() {
+        return this.name;
+    }
+    
+    get Surname() {
+        return this.surname;
+    }
+    
+    set Surname(value) {
+        this.surname = value;
+    }
 }
 
 // ==================================================================================================================================
@@ -100,6 +141,14 @@ function getPropertyProperties(obj, property) {
 
 // ==================================================================================================================================
 
+// Get the intrinsic/internal properties of a member property, function, etc.
+
+function getPropertyValue(obj, property) {
+    return obj[property];
+}
+
+// ==================================================================================================================================
+
 showDivider();
 
 let o1 = new SayObject("Object");
@@ -121,6 +170,29 @@ showMembers(o3);
 let o4 = new ManufacturedSayClassTwo("ClassFactory");
 o4.sayHi("Sparrow");
 showMembers(o4);
+
+showDivider();
+
+console.log("o4[name] = " + getPropertyValue(o4, "name"));
+console.log("o4[Name] = " + getPropertyValue(o4, "Name"));
+
+showDivider();
+
+let po1 = new PropertyBagNOT();
+console.log("po1.name [" + po1.name + "]");
+console.log("po1.surname [" + po1.surname + "]");
+console.log("po1.Name [" + po1.Name + "]");
+console.log("po1.Surname [" + po1.Surname + "]");
+
+// -----> FAILS - Setter Missing ----> po1.Name = "C-Louis";
+po1.Surname = "C-Sparrow";
+console.log("po1.Name [" + po1.Name + "]");
+console.log("po1.Surname [" + po1.Surname + "]");
+
+showDivider();
+
+let arr = new PowerArray(1, 2, 3, 10, 11, 12, 50, 51, 52);
+console.log("Extending JavaScript Natives is [" + arr.containsStuff() + "] fun!");
 
 showDivider();
 
