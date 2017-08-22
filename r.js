@@ -237,9 +237,16 @@ console.log("user1 is of class 'PropertyBagNOT': " + user1 instanceof PropertyBa
 
 showDivider();
 
-let s = "123456789.";
+let s = "Louis Steyn";
+let s1 = s.substr(0, 5);
+let s2 = s.substr(6, 5);
 console.log(s);
-let s1 = s.replace(s.substring(4, 5), "xx");
 console.log(s1);
+console.log(s2);
 
 showDivider();
+
+
+
+showDivider();
+
