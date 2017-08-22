@@ -108,6 +108,29 @@ class PropertyBagNOT  {
 
 // ==================================================================================================================================
 
+// Adds a property to na object dynamically at runtime - mindblowing
+
+class userClass {
+    constructor(name, surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+}
+
+function AddPropertyDynamically(obj, propName) {
+    Object.defineProperty(obj, propName, {
+        get() {
+            return `${this.name} ${this.surname}`;
+        },
+
+        set(value) {
+            [this.name, this.surname] = value.split(" ");
+        }
+    });
+}
+
+// ==================================================================================================================================
+
 // Enumerates the members of an object - hint can be used on sustem objects as well ;)
 
 function showMembers(obj) {
@@ -199,5 +222,24 @@ showDivider();
 setPropertyWritableFlag(o1, "name", false);
 let desc = getPropertyProperties(o1, 'name');
 console.log("desc (JSON): " + JSON.stringify(desc, null, 2));
+
+showDivider();
+
+let user = new userClass("John", "Smith");
+AddPropertyDynamically(user, 'fullName');
+console.log(user.fullName);
+
+showDivider();
+
+let user1 = new userClass("John", "Smith");
+console.log("user1 is of class 'userClass': " + user1 instanceof userClass);
+console.log("user1 is of class 'PropertyBagNOT': " + user1 instanceof PropertyBagNOT);
+
+showDivider();
+
+let s = "123456789.";
+console.log(s);
+let s1 = s.replace(s.substring(4, 5), "xx");
+console.log(s1);
 
 showDivider();

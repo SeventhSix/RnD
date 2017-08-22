@@ -13,7 +13,7 @@ Git
 - git config --global user.name "SeventhSix"
 - git config --global user.email "highgatekeeper@gmail.com"
 - git ignore feature (ignore file) # ?
-- git config --global http.proxy http://proxyweb.services.site.local:8080 # set up git to work through proxy
+- git config --global http.proxy http://<user>@proxyweb.services.site.local:8080 # set up git to work through proxy
 - git clone <remote repo url> [<dir name>] # clones a repository and its contents to the directory name after the repo or the one specified
 - git init # create an empty local repo
 - git status # show changes since last commit
