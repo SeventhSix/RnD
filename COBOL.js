@@ -1,6 +1,6 @@
 // ==================================================================================================================================
 
-let BancsMessageDataType = {
+let COBOLMessageDataType = {
 	/**
 	 * This can be seen as a normal string
 	 */
@@ -10,19 +10,19 @@ let BancsMessageDataType = {
 	 */
 	INTEGER : 2,
 	/**
-	 * This is a date format coming in from bancs as 21022012
+	 * This is a date format coming in from COBOL as 21022012
 	 */
 	DATE_DDMMYYYY : 3,
 	/**
-	 * This is a date format coming in from bancs as 20120612
+	 * This is a date format coming in from COBOL as 20120612
 	 */
 	DATE_YYYYMMDD : 4,
 	/**
-	 * This is a date format coming in from bancs as 21/02/2012
+	 * This is a date format coming in from COBOL as 21/02/2012
 	 */
 	DATE_DDSMMSYYYY : 5,
 	/**
-	 * This is a date format coming in from bancs as 210212
+	 * This is a date format coming in from COBOL as 210212
 	 */
 	DATE_DDMMYY : 6,
 	/**
@@ -80,16 +80,16 @@ let BancsMessageDataType = {
 	 */
 	INTEGER_CHECK_DIGIT : 14,
 	/**
-	 * This will remove the check digit when a account is sent to bancs. When a account comes from bancs it will not remove anything.
+	 * This will remove the check digit when a account is sent to COBOL. When a account comes from COBOL it will not remove anything.
 	 */
     INTEGER_REMOVE_CHECK_DIGIT : 15
 }
 
 // ==================================================================================================================================
 
-// This class handles the building of the actual flat structure COBOL Bancs message compatibile with the generic AMQ SOAP call
+// This class handles the building of the actual flat structure COBOL message compatibile with the generic AMQ SOAP call
 
-class BancsAMQInputMessage {
+class COBOLAMQInputMessage {
     constructor(name) {
         this.name = name;
     }
@@ -102,8 +102,8 @@ class BancsAMQInputMessage {
 
 // ==================================================================================================================================
 
-let current = BancsMessageDataType.DATE_DDSMMSYYYY;
-if(current == BancsMessageDataType.DECIMAL_S4) {
+let current = COBOLMessageDataType.DATE_DDSMMSYYYY;
+if(current == COBOLMessageDataType.DECIMAL_S4) {
     console.log("DECIMAL_S4 [" + current + "]");
 }
 else {
