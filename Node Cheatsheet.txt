@@ -1,13 +1,21 @@
 Tools
 =====
-- Git : https://git-scm.com/download/win
-- Default options
-- Fix registry - commands with quotes and correct paths
+- Node and npm : https://nodejs.org/en/download/
 
-Git
+npm
 ===
-- Remote repos need to be pre-existing (bad tutor)
-- Right click local repo folder and "Git Bash"
+- npm<enter> # usage
+- npm <command> -h # help on individual commands
+- npm config list # current non-default config entries
+- npm config set proxy http://<username>:<password>@proxyweb.services.site.local:8080 # set http proxy
+- npm config set https-proxy http://<username>:<password>@proxyweb.services.site.local:8080 # set https proxy
+- npm init # interactively build a package.json file - !! Add "“start”: “node index.js”" to "“scripts”:"
+- npm list # lists all installed packages
+- npm prune # removes packages not depended on by your project according to your package.json
+- npm outdated # installed packages that are outdated, but allowable by package.json
+
+node
+====
 - use --help to get more help (html help)
 - HEAD # latest changes
 - git config --global user.name "SeventhSix"
