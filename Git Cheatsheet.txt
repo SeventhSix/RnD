@@ -10,6 +10,7 @@ Git
 - Right click local repo folder and "Git Bash"
 - use --help to get more help (html help)
 - HEAD # latest changes
+- Add .gitignore file in same folder as the .git directory to control what is taken into account by git
 - git config --global user.name "76"
 - git config --global user.email "hgk@gmail.com"
 - git ignore feature (ignore file) # ?

@@ -13,27 +13,14 @@ npm
 - npm list # lists all installed packages
 - npm prune # removes packages not depended on by your project according to your package.json
 - npm outdated # installed packages that are outdated, but allowable by package.json
+- npm install <pkg> --save # installs a package to "..\node_modules" and with the --save option, also updates dependencies in package.json
 
 node
 ====
-- use --help to get more help (html help)
-- HEAD # latest changes
-- git config --global user.name "76"
-- git config --global user.email "hgk@gmail.com"
-- git ignore feature (ignore file) # ?
-- git config --global http.proxy http://<user>@proxyweb.services.site.local:8080 # set up git to work through proxy
-- git clone <remote repo url> [<dir name>] # clones a repository and its contents to the directory name after the repo or the one specified
-- git init # create an empty local repo
-- git status # show changes since last commit
-- git log # show commit activity
-- git diff # show changes between adds / commits
-- git pull # get latest changes from upstream repo
-- git add --verbose --all # add all changed files to staging area for next commit
-- git commit -m "Commit Reason" # commits all additions (add) to the local repo
-- git remote add <repo local name> https://CPnnnnnn@integrationrepo.int.capinet:8443/scm/tes/git-learning.git # add preconfigured repo
-- git config -l # list config properties
-- git push -u <repo local name> <branch name> # push to pre-configured remote repo
-- git branch -l # list all branches in local repo
-- git branch <branch name> # create a new branch with name <branch name>
-- git checkout <branch name> # switch branch
-- git merge -m "Commit Reason" <branch name> # merge <branch name> into current branch ---> edit conflict files to reflect required state
+- process.argv, process.argv.slice(2), process.argv.slice(2)[1] # parse command line argumants
+
+express and REST
+================
+- npm install express # https://www.npmjs.com/package/express
+- npm install -g express-generator # https://www.npmjs.com/package/express-generator
+- npm install node-rest-client # https://www.npmjs.com/package/node-rest-client
