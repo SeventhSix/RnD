@@ -1,6 +1,7 @@
 // ====================================================================================
 //
 // https://nodejs.org/api/process.html#process_process_hrtime_time
+// https://nodejs.org/api/buffer.html
 //
 // ====================================================================================
 
@@ -44,24 +45,28 @@ function TimeStringPlus()
     }
 
     let tv = StopHRTimer(ts);
+    
     console.log(`TimeStringPlus-Diff: ${FormatHRTime(tv)}`);
 }
 
 // ====================================================================================
 
-function TimeStringConcat()
+function TimeStringBuffer()
 {
-    let ss = "";
-    ss =  ss + "Louis,";
+    let bArr = [];
+    let bArrSize = 0;
+    for(var i = 1000; i > 0; i--)
+    {
+        bArr[i] = Buffer.from("Louis,");
+        bArrSize += bArr[i].length;
+    }
 
     let ts = StartHRTimer();
 
-    for(var i = 0; i < 1000; i++)
-    {
-        ss = ss + "Louis,";
-    }
+    let bb = Buffer.concat(bArr, bArrSize);
 
     let tv = StopHRTimer(ts);
+
     console.log(`TimeStringConcat-Diff: ${FormatHRTime(tv)}`);
 }
 
@@ -80,6 +85,7 @@ function TimeArrayConcat()
     let bs = sArr.join("");
 
     let tv = StopHRTimer(ts);
+    
     console.log(`TimeArrayConcat-Diff: ${FormatHRTime(tv)}`);
 }
 
@@ -95,4 +101,11 @@ console.log('=======================================================');
 for(var i = 0; i < 10; i++)
 {
     TimeArrayConcat();
+}
+
+console.log('=======================================================');
+
+for(var i = 0; i < 10; i++)
+{
+    TimeStringBuffer();
 }
