@@ -28,6 +28,9 @@ function GetTestSocket() {
 	return client;
 }
 
+// =================================================================================================
+// Normal test
+// =================================================================================================
 function Test1(ipAddress, portNumber, requestPath, hostHeader) {
 	let client = GetTestSocket();
 
@@ -40,6 +43,9 @@ function Test1(ipAddress, portNumber, requestPath, hostHeader) {
 	});
 }
 
+// =================================================================================================
+// Slow Request
+// =================================================================================================
 function Test2(ipAddress, portNumber, requestPath, hostHeader) {
 	let client = GetTestSocket();
 
@@ -58,6 +64,9 @@ function Test2(ipAddress, portNumber, requestPath, hostHeader) {
 	});
 }
 
+// =================================================================================================
+// Slow Headers
+// =================================================================================================
 function Test3(ipAddress, portNumber, requestPath, hostHeader) {
 	let client = GetTestSocket();
 
@@ -76,12 +85,107 @@ function Test3(ipAddress, portNumber, requestPath, hostHeader) {
 	});
 }
 
+// =================================================================================================
+// Big Request
+// =================================================================================================
+function Test4(ipAddress, portNumber, requestPath, hostHeader) {
+	let client = GetTestSocket();
 
+	client.connect(portNumber, ipAddress, function() {
+		console.log('# Connected:');
+
+		let httpRequest = 'GET ' + requestPath + ' HTTP/1.1\r\nHost: ' + hostHeader + '\r\n'
+		
+		for(var i = 0; i < 1000; i++) {
+			httpRequest = httpRequest + 'X-Sneaky' + i + ': q\r\n';
+		}
+		
+		httpRequest = httpRequest + 'Connection: close\r\n\r\n';
+		client.write(httpRequest);
+		console.log('# Sent:\r\n' + httpRequest);
+	});
+}
+
+// =================================================================================================
+// Bad Request (Specification 1)
+// =================================================================================================
+function Test5(ipAddress, portNumber, requestPath, hostHeader) {
+	let client = GetTestSocket();
+
+	client.connect(portNumber, ipAddress, function() {
+		console.log('# Connected:');
+
+		let httpRequest = 'GET ' + requestPath + ' HTTP/l.l\r\nHost: ' + hostHeader + '\r\nConnection: close\r\n\r\n';
+		client.write(httpRequest);
+		console.log('# Sent:\r\n' + httpRequest);
+	});
+}
+
+// =================================================================================================
+// Bad Request (Specification 2)
+// =================================================================================================
+function Test6(ipAddress, portNumber, requestPath, hostHeader) {
+	let client = GetTestSocket();
+
+	client.connect(portNumber, ipAddress, function() {
+		console.log('# Connected:');
+
+		let httpRequest = 'GET ' + requestPath + ' HTTP/1.1\r\nHost: ' + hostHeader + '\r\nCorrection: close\r\n\r\n';
+		client.write(httpRequest);
+		console.log('# Sent:\r\n' + httpRequest);
+	});
+}
+
+// =================================================================================================
+// Bad Request (Specification 3)
+// =================================================================================================
+function Test7(ipAddress, portNumber, requestPath, hostHeader) {
+	let client = GetTestSocket();
+
+	client.connect(portNumber, ipAddress, function() {
+		console.log('# Connected:');
+
+		let httpRequest = 'GET ' + requestPath + ' HTTP/1.1\r\nHost: ' + hostHeader + '\r\nConnection: close\r\nX-BadHeader: This is bad\r\n\r\n';
+		client.write(httpRequest);
+		console.log('# Sent:\r\n' + httpRequest);
+	});
+}
+
+// =================================================================================================
+// Bad Request (Sneaky)
+// =================================================================================================
+function Test99(ipAddress, portNumber, requestPath, hostHeader) {
+	let client = GetTestSocket();
+
+	client.connect(portNumber, ipAddress, function() {
+		console.log('# Connected:');
+
+		let httpRequest = 'GET ' + requestPath + ' HTTP/1.1\r\nHost: ' + hostHeader + '\n\rConnection: close\r\n\r\n';
+		client.write(httpRequest);
+		console.log('# Sent:\r\n' + httpRequest);
+	});
+}
+
+/*
+// =================================================================================================
+// HTTP Reference Paramaters - Ensemble
+// =================================================================================================
 let ipAddress = '10.250.45.142';
 let portNumber = 8181;
 let requestPath = '/hawtio/login';
 let hostHeader = 'cbblvfensqa01:8181';
+*/
 
-Test3(ipAddress, portNumber, requestPath, hostHeader);
+
+// =================================================================================================
+// HTTP Paramaters - Daniel - http://10.255.8.14:3128/
+// =================================================================================================
+let ipAddress = '10.255.8.14';
+let portNumber = 3128;
+let requestPath = '/';
+let hostHeader = '10.255.8.14:3128';
+
+
+Test99(ipAddress, portNumber, requestPath, hostHeader);
 
 sleep(1500);
