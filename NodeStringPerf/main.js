@@ -53,12 +53,12 @@ function TimeStringPlus()
 
 function TimeStringBuffer()
 {
-    let bArr = [];
+    let bArr = new Array();
     let bArrSize = 0;
     for(var i = 1000; i > 0; i--)
     {
         bArr[i] = Buffer.from("Louis,");
-        bArrSize += bArr[i].length;
+        bArrSize += 6;
     }
 
     let ts = StartHRTimer();
